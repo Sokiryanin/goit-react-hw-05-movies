@@ -1,46 +1,61 @@
-const { useParams, Outlet } = require('react-router-dom');
-
+import { useEffect, useState } from 'react';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { getMoviesById } from 'services/fetch';
+import { ContentWrap, MoviePoster, Wrapper } from './MovieCard.styled';
+import poster from '../images/no-picture-available-icon-1.jpeg';
 export const MovieCard = () => {
+  const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+
+  useEffect(() => {
+    async function getMovie() {
+      try {
+        const ditailMovie = await getMoviesById(movieId);
+        setMovie(ditailMovie);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMovie();
+  }, [movieId]);
+
   return (
     <main>
-      <div>
-        <img src="" alt="" />
-        <h2>Title {movieId}</h2>
-        <p>User score: 100%</p>
-        <h3>Overview</h3>
-        <p>description</p>
-        <h3>Genres</h3>
-        <p>type of genres</p>
-      </div>
-      <Outlet />
+      {movie && (
+        <>
+          <Wrapper>
+            <MoviePoster
+              src={
+                movie.backdrop_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+                  : poster
+              }
+              alt={movie.title}
+            />
+            <ContentWrap>
+              <h1>{movie.title}</h1>
+              <p>User score: {Math.round(movie.vote_average) * 10}% </p>
+              <h3>Overview</h3>
+              <p>{movie.overview}</p>
+              <h3>Genres</h3>
+              <ul>
+                {movie.genres.map(({ id, name }) => {
+                  return <li key={id}>{name}</li>;
+                })}
+              </ul>
+            </ContentWrap>
+          </Wrapper>
+          <ul>
+            <li>
+              <NavLink to="cast">Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to="reviews">Reviews</NavLink>
+            </li>
+          </ul>
+          <Outlet />
+        </>
+      )}
     </main>
   );
 };
-
-// import { Link, Outlet, useParams } from 'react-router-dom';
-
-// const DogDetails = () => {
-//   const { dogId } = useParams();
-
-//   // useEffect(() => {
-//   // HTTP запрос, если нужно
-//   // }, [])
-
-//   return (
-//     <>
-//       <h1>DogDetails: {dogId}</h1>
-//       <ul>
-//         <li>
-//           <Link to="subbreeds">Подподроды</Link>
-//         </li>
-//         <li>
-//           <Link to="gallery">Галерея</Link>
-//         </li>
-//       </ul>
-//       <Outlet />
-//     </>
-//   );
-// };
-
-// export default DogDetails;

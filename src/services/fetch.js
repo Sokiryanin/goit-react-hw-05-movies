@@ -17,14 +17,39 @@ const options = {
 export const getTrandingMovies = async () => {
   const { data } = await axios.get(`${BASE_URL}trending/all/day`, options);
   const results = await data.results;
-  //   console.log(results);
+  const upcomMovies = results.map(({ backdrop_path, id, name, title }) => ({
+    backdrop_path,
+    id,
+    name,
+    title,
+  }));
+  return upcomMovies;
+};
 
-  return results;
+// по айдішніку для картки фільму
+export const getMoviesById = async id => {
+  const { data } = await axios.get(`${BASE_URL}movie/${id}`, options);
+  return data;
+};
+
+// запит акторів
+export const getCastById = async id => {
+  const { data } = await axios.get(`${BASE_URL}movie/${id}/credits`, options);
+  return data.cast;
+};
+
+// запит рецензій
+export const getReviewById = async id => {
+  const { data } = await axios.get(`${BASE_URL}movie/${id}/reviews`, options);
+  return data.results;
 };
 
 // запит по пошуку
-// const getSearchMovie = async query => {
-//   const { data } = await axios.get(
-//     `${BASE_URL}search/movie?query=${query}&include_adult=false&page=1`
-//   );
-// };
+export const getMovieByQuery = async query => {
+  const { data } = await axios.get(
+    `${BASE_URL}search/movie?query=${query}}`,
+    options
+  );
+
+  return data.results;
+};
