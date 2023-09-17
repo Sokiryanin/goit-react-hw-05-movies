@@ -11,6 +11,7 @@ import {
 
 export function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams);
 
   const [inputValue, setInputValue] = useState('');
 
