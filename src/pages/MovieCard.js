@@ -16,7 +16,6 @@ export const MovieCard = () => {
   const { movieId } = useParams();
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     async function getMovie() {
@@ -32,7 +31,7 @@ export const MovieCard = () => {
 
   return (
     <main>
-      <Link to={backLinkHref}>Go back</Link>
+      <Link to={location.state}>Go back</Link>
       {movie && (
         <>
           <Wrapper>

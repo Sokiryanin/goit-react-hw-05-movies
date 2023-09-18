@@ -19,7 +19,7 @@ export function SearchBar() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    setSearchParams({ query: value });
+    setSearchParams({ movie: value });
     setValue('');
   };
 
