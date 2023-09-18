@@ -9,15 +9,13 @@ export const Movies = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getMovies() {
-      setLoading(true);
-
       const searchMovie = await getMovieByQuery(query);
-
+      setLoading(true);
       try {
         setMovies(searchMovie);
 

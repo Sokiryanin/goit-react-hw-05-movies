@@ -10,9 +10,8 @@ import {
 } from './SearchBar.styled';
 
 export function SearchBar() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState('');
-  const query = searchParams.get('query') ?? '';
 
   const changeFilter = evt => {
     setInputValue(evt.target.value);
