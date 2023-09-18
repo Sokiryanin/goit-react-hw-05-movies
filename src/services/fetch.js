@@ -17,12 +17,17 @@ const options = {
 export const getTrandingMovies = async () => {
   const { data } = await axios.get(`${BASE_URL}trending/all/day`, options);
   const results = await data.results;
-  const upcomMovies = results.map(({ backdrop_path, id, name, title }) => ({
-    backdrop_path,
-    id,
-    name,
-    title,
-  }));
+  console.log(results);
+
+  const upcomMovies = results.map(
+    ({ poster_path, backdrop_path, id, name, title }) => ({
+      poster_path,
+      backdrop_path,
+      id,
+      name,
+      title,
+    })
+  );
   return upcomMovies;
 };
 

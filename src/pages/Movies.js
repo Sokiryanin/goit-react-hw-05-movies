@@ -1,4 +1,5 @@
-import { MoviesList } from 'components/MoviesList';
+import { Loader } from 'components/Loader/Loader';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 import SearchBar from 'components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -14,8 +15,9 @@ export const Movies = () => {
 
   useEffect(() => {
     async function getMovies() {
-      const dataMovies = await getMovieByQuery(query);
       setLoading(true);
+      const dataMovies = await getMovieByQuery(query);
+
       try {
         setMovies(dataMovies);
 
@@ -34,7 +36,7 @@ export const Movies = () => {
   return (
     <>
       <SearchBar />
-      {loading && <div>...Loading</div>}
+      {loading && <Loader />}
       {query && !loading && <MoviesList movies={movies} />}
     </>
   );

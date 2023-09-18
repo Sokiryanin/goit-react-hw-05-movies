@@ -1,11 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { Home } from 'pages/Home';
+import { Home } from 'pages/Home/Home';
 import { Movies } from 'pages/Movies';
-import { Layout } from './Layout';
-import { MovieCard } from 'pages/MovieCard';
-import { Cast } from './Cast/Cast';
-import { Reviews } from './Reviews';
+import { Layout } from '../Layout/Layout';
+import { MovieCard } from 'pages/MovieCard/MovieCard';
+import { Cast } from '../Cast/Cast';
+import { Reviews } from '../Reviews/Reviews';
+import { NotFound } from 'components/NotFound/NotFound';
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path="cast" element={<Cast />}></Route>
           <Route path="reviews" element={<Reviews />}></Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

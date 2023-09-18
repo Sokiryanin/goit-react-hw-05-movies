@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { Container, Header, Link } from './App.styled';
+
 import { Toaster } from 'react-hot-toast';
+import { Container, Header, Link } from '../App/App.styled';
+import { Suspense } from 'react';
 
 export const Layout = () => {
   return (
@@ -13,7 +15,11 @@ export const Layout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
-      <Outlet />
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
+
       <Toaster />
     </Container>
   );
