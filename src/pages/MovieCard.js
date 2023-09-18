@@ -4,7 +4,7 @@ import { getMoviesById } from 'services/fetch';
 import { ContentWrap, MoviePoster, Wrapper } from './MovieCard.styled';
 import poster from '../images/no-picture-available-icon-1.jpeg';
 export const MovieCard = () => {
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState();
   const { movieId } = useParams();
 
   useEffect(() => {

@@ -11,9 +11,8 @@ import {
 
 export function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
-
   const [inputValue, setInputValue] = useState('');
+  const query = searchParams.get('query') ?? '';
 
   const changeFilter = evt => {
     setInputValue(evt.target.value);
@@ -21,10 +20,12 @@ export function SearchBar() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-
     setSearchParams({ query: inputValue });
+    reset();
   };
-
+  const reset = () => {
+    setInputValue('');
+  };
   return (
     <Wrapper>
       <SearchForm onSubmit={handleSubmit}>
@@ -47,5 +48,4 @@ export function SearchBar() {
     </Wrapper>
   );
 }
-
 export default SearchBar;

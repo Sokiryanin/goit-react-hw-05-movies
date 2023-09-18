@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Container, Header, Link } from './App.styled';
+import { Toaster } from 'react-hot-toast';
 
 export const Layout = () => {
   return (
@@ -13,6 +14,7 @@ export const Layout = () => {
         </nav>
       </Header>
       <Outlet />
+      <Toaster />
     </Container>
   );
 };
