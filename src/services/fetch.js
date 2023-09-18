@@ -44,7 +44,7 @@ export const getReviewById = async id => {
   return data.results;
 };
 
-// запит по пошуку
+// запит по query
 export const getMovieByQuery = async query => {
   const { data } = await axios.get(
     `${BASE_URL}search/movie?query=${query}}`,

@@ -11,20 +11,18 @@ import {
 
 export function SearchBar() {
   const [, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState('');
 
   const changeFilter = evt => {
-    setInputValue(evt.target.value);
+    setValue(evt.target.value);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    setSearchParams({ query: inputValue });
-    reset();
+    setSearchParams({ query: value });
+    setValue('');
   };
-  const reset = () => {
-    setInputValue('');
-  };
+
   return (
     <Wrapper>
       <SearchForm onSubmit={handleSubmit}>
@@ -36,7 +34,7 @@ export function SearchBar() {
 
         <SearchFormInput
           onChange={changeFilter}
-          value={inputValue}
+          value={value}
           type="text"
           name="movie"
           autoComplete="off"

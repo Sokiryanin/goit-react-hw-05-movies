@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
+
 import { getMoviesById } from 'services/fetch';
 import { ContentWrap, MoviePoster, Wrapper } from './MovieCard.styled';
 import poster from '../images/no-picture-available-icon-1.jpeg';
+
 export const MovieCard = () => {
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     async function getMovie() {
@@ -21,6 +32,7 @@ export const MovieCard = () => {
 
   return (
     <main>
+      <Link to={backLinkHref}>Go back</Link>
       {movie && (
         <>
           <Wrapper>
@@ -47,10 +59,14 @@ export const MovieCard = () => {
           </Wrapper>
           <ul>
             <li>
-              <NavLink to="cast">Cast</NavLink>
+              <NavLink to="cast" state={location.state}>
+                Cast
+              </NavLink>
             </li>
             <li>
-              <NavLink to="reviews">Reviews</NavLink>
+              <NavLink to="reviews" state={location.state}>
+                Reviews
+              </NavLink>
             </li>
           </ul>
           <Outlet />

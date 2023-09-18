@@ -9,17 +9,17 @@ export const Movies = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getMovies() {
-      const searchMovie = await getMovieByQuery(query);
+      const dataMovies = await getMovieByQuery(query);
       setLoading(true);
       try {
-        setMovies(searchMovie);
+        setMovies(dataMovies);
 
-        if (searchMovie.length === 0 && query) {
+        if (dataMovies.length === 0 && query) {
           toast.error('Sorry, no movies were found for your request.');
         }
       } catch (error) {
