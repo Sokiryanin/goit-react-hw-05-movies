@@ -29,7 +29,8 @@ export const MovieCard = () => {
         const ditailMovie = await getMoviesById(movieId);
         setMovie(ditailMovie);
       } catch (error) {
-        navigate('*', { replace: true });
+        console.log(error.message);
+        navigate('/', { replace: true });
       } finally {
         setLoading(false);
       }
