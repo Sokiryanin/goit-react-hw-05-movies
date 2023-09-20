@@ -4,7 +4,7 @@ import { getReviewById } from 'services/fetch';
 import { AuthorName, ListReviews } from './Reviews.styled';
 import { Loader } from 'components/Loader/Loader';
 
-export const Reviews = () => {
+export default function Reviews() {
   const [review, setReview] = useState();
   const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
@@ -44,4 +44,4 @@ export const Reviews = () => {
       )}
     </div>
   );
-};
+}

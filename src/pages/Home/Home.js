@@ -6,7 +6,7 @@ import { Title } from './Home.styled';
 import { Loader } from 'components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 
-export const Home = () => {
+export default function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -32,4 +32,4 @@ export const Home = () => {
       {movies.length > 0 && <MoviesList movies={movies} />}
     </main>
   );
-};
+}

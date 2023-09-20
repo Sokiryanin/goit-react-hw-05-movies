@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Container, Header, Link } from '../App/App.styled';
 import { Suspense } from 'react';
 
-export const Layout = () => {
+export default function Layout() {
   return (
     <Container>
       <Header>
@@ -23,4 +23,4 @@ export const Layout = () => {
       <Toaster />
     </Container>
   );
-};
+}

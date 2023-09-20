@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getMovieByQuery } from 'services/fetch';
 
-export const Movies = () => {
+export default function Movies() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('movie') ?? '';
 
@@ -41,4 +41,4 @@ export const Movies = () => {
       {query && !loading && <MoviesList movies={movies} />}
     </>
   );
-};
+}

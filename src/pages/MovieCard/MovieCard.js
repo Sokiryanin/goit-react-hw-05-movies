@@ -14,7 +14,7 @@ import {
 import poster from '../../images/no-picture-available-icon-1.jpeg';
 import { Loader } from 'components/Loader/Loader';
 
-export const MovieCard = () => {
+export default function MovieCard() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
@@ -85,4 +85,4 @@ export const MovieCard = () => {
       )}
     </>
   );
-};
+}

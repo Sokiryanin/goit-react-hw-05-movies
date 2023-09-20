@@ -4,7 +4,7 @@ import { getCastById } from 'services/fetch';
 import poster from '../../images/poster.png';
 import { CastList, CastWrapper } from './Cast.styled';
 
-export const Cast = () => {
+export default function Cast() {
   const [cast, setCast] = useState();
   const { movieId } = useParams();
 
@@ -46,4 +46,4 @@ export const Cast = () => {
       </CastList>
     </div>
   );
-};
+}
