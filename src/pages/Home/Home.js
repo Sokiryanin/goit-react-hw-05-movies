@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { getTrandingMovies } from 'services/fetch';
 import { Title } from './Home.styled';
 import { Loader } from 'components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getMovies() {
@@ -15,13 +17,13 @@ export const Home = () => {
       try {
         setMovies(await getTrandingMovies());
       } catch (error) {
-        console.log(error.message);
+        navigate('/', { replace: true });
       } finally {
         setLoading(false);
       }
     }
     getMovies();
-  }, []);
+  }, [navigate]);
 
   return (
     <main>

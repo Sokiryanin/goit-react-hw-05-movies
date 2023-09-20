@@ -3,7 +3,7 @@ import { MoviesList } from 'components/MoviesList/MoviesList';
 import SearchBar from 'components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getMovieByQuery } from 'services/fetch';
 
 export const Movies = () => {
@@ -12,6 +12,7 @@ export const Movies = () => {
 
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getMovies() {
@@ -25,13 +26,13 @@ export const Movies = () => {
           toast.error('Sorry, no movies were found for your request.');
         }
       } catch (error) {
-        console.log(error.message);
+        navigate('*', { replace: true });
       } finally {
         setLoading(false);
       }
     }
     getMovies();
-  }, [query]);
+  }, [query, navigate]);
 
   return (
     <>
